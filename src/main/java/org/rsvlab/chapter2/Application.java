@@ -1,11 +1,20 @@
 package org.rsvlab.chapter2;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Every dependency has a class to do auto config. You can exclude it in
+ * enable auto config annotation.
+ * You can also change the default config value in application.properties file.
+ * */
 @SpringBootApplication
 public class Application {
 
@@ -16,11 +25,17 @@ public class Application {
 
 
 @RestController
-class HelloWorld {
+class GreetingController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(GreetingController.class);
+
+	@Autowired
+	Environment env;//properties in applicatoin.properties will be loaded in to this class.
 	
 	@RequestMapping("/greeting")
 	@ResponseBody
 	public Greet sayHello() {
+		logger.info("bootrest.customProperty: " + env.getProperty("bootrest.customProperty"));
 		return new Greet("Hello, world!");
 	}
 }
