@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +36,8 @@ class GreetingController {
 	@Autowired
 	Environment env;//properties in applicatoin.properties will be loaded in to this class.
 	
+	
+	@CrossOrigin
 	@RequestMapping("/greeting")
 	@ResponseBody
 	public Greet sayHello() {
